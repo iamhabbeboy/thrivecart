@@ -1,13 +1,16 @@
-# Use official PHP CLI image
-FROM php:8.4-cli
+FROM php:8.4-cli-alpine
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    zip \
-    php-bcmath \
-    && rm -rf /var/lib/apt/lists/*
+# Install system dependencies and bcmath
+RUN apk add --no-cache \
+        git \
+        unzip \
+        zip \
+        libzip-dev \
+        oniguruma-dev \
+    && apk add --no-cache --virtual .build-deps \
+        gcc g++ make autoconf \
+    && docker-php-ext-install bcmath \
+    && apk del .build-deps
 
 # Set working directory
 WORKDIR /app
@@ -19,7 +22,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY . .
 
 # Install PHP dependencies
-RUN composer install
+RUN composer install --no-interaction --prefer-dist
 
 # Default command
 CMD ["php", "-v"]
