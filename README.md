@@ -70,7 +70,7 @@ This promotion gives a 50% discount on the second red widgets purchased.
 - PHPUnit
 
 ### Install
-There's a Makefile that makes it easy to execute each of the commands.
+A Makefile is included to simplify command execution. For example, the following command installs all dependencies needed to run the application using Docker.
 ```bash
 make up
 ```
