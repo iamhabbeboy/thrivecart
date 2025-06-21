@@ -14,6 +14,6 @@ $delivery = new DeliveryCharge([
 $offers = [new RedWidgetOffer()];
 
 $basket = new Basket($catalogue, $delivery, $offers);
-$basket->add('B01');
+$basket->add('R01');
 $basket->add('R01');
 echo $basket->total();
