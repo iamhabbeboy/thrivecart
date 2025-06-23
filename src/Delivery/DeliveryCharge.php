@@ -23,7 +23,6 @@ class DeliveryCharge implements DeliveryChargeInterface
     public function calculate(float $subtotal): float
     {
         foreach ($this->rules as $tier) {
-            ;
             if ($subtotal < $tier['threshold']) {
                 return $tier['cost'];
             }
